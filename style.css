@@ -1,0 +1,156 @@
+body {
+    margin: 0;
+    /*height: 100vh; - для всего остального*/
+    min-height: 100vh; /*для сайта*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.block {
+    width: 500px;
+    height: 500px;
+    border: 3px solid;
+    background-color: bisque;
+    position: relative;
+        /*тег стоит на месте, оставляет свое место пустым,
+    сам может куда-то перемещаться, сдвигается
+    относительно своего местоположения*/
+}
+.item {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.item:hover {
+    animation: circle 1s linear;
+}
+.item1 {
+    background-color: #f00;
+    position: absolute;
+    /*top, right, bottom, left работать не будут*/
+    top: 100px;
+    right: 50px;
+}
+.item2 {
+    background-color: #0f0;
+    position: relative;
+    left: 50px;
+    top: -10px;
+}
+.item3 {
+    background-color: #00f;
+    position: fixed;
+    /*сдвигается только 
+    относительно окна браузера, т.е. viewport:
+    баннерные всплывающие уведомления и т.д.*/
+    bottom: 100px;
+    left: 50%;
+}
+/*position: static */
+@keyframes circle{
+    25% {
+        transform: rotate(30deg);
+    }
+    75% {
+        transform: rotate(-30deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/*
+    Делаем сайт для мобильной версии - адаптации =)
+*/
+.wrapper{
+    min-height: 100vh;
+    width: 1000px;
+    background-color: aquamarine;
+    font-family: sans-serif;/*шрифт без засечек*/
+}
+a {
+    color: inherit; /*Цвет текста такой же как у родителя*/
+    text-decoration: none; /*Убирается палка подчеркивания в ссылках внизу*/
+}
+h2 {/*Убираем отступ между шапкой и основным блоком*/
+    margin: 0;
+}
+header {
+    background-color: #222;
+    color: #fff; /*Никогда не используйте идеальный контраст, например, черный - белый*/
+    padding: 20px 50px; /*Отступы справа слева - 20, сверху-снизу - 50 пикселей*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    font-size: 30px;
+}
+nav {
+    display: flex;
+    gap: 20px; /*добавляем равноудаленное расстояние между тегами линк*/
+}
+.cards-container {
+    background-color: aliceblue;
+    /*Самое важное здесь:*/
+    display: grid;
+    padding: 30px;
+    gap: 30px;
+    grid-template-columns: repeat(4, 1fr);
+}
+.cards-container h2 {
+    grid-column-end: span 4; /*Сколько пространства ты занимаешь - span 4 - я займу собой 4 блока*/
+    text-align: center;
+}
+.card {
+    border: 1px solid;
+    padding: 20px;
+    text-align: center;
+}
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 600px;
+    padding: 30px;
+    background-image: radial-gradient(circle, cornflowerblue 30%, aliceblue 40%, darkslateblue); /*Градиенты линейный и радиальный, здесь - радиальный*/
+}
+/*мобильная адаптация*/
+@media (min-width: 700px) and (max-width: 800px) {
+    .banner {
+        background-image: radial-gradient(circle, cadetblue, springgreen, cadetblue);
+    }
+}
+@media (max-width: 999px) {
+    .wrapper {
+        width: 100%;
+    }
+}
+/*Для наших карточек делаем 4 точки остановки - для 1000 пикселей, 992, для маленьких планшетов 768 и для мобильных тлф 400*/
+@media (max-width: 992px) {
+    .cards-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .cards-container h2 {
+        grid-column-end: span 3;
+    }
+}
+@media (max-width: 768px) {
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .cards-container h2 {
+        grid-column-end: span 2;
+    }
+}
+@media (max-width: 400px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+    .cards-container h2 {
+        grid-column-end: 2; /*или span 1*/
+    }
+}
